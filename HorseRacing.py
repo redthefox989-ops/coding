@@ -5,8 +5,7 @@ import tkinter as tk
 
 # Lines 9 to 275 AI generated (shapes of a horse, and parts of a jockey)
 # I gave ChatGPT images of a horse silhouette and a dissected jockey silhouette cut into different pieces
-# In the other version, the shape lists are in an imported python file 'from horse_shapes import *', however it is easier to send in 1 file
-# I put this at the start so it is easier to read the rest
+# In the original version, the shape lists are in an imported python file 'from horse_shapes import *'
 
 arm = [(-154.94, -44.42), (-149.34, -18.420000000000005), (-136.54000000000002, 7.179999999999995), (-101.74000000000001, 38.779999999999994), (-44.94000000000001, 35.58), (27.05999999999999, 17.179999999999996), (31.859999999999992, 46.779999999999994), (47.05999999999999, 86.38), (63.459999999999994, 115.17999999999999), (92.66, 112.38), (117.85999999999999, 93.97999999999999), (115.85999999999999, 43.58), (106.25999999999999, -10.420000000000005), (87.85999999999999, -59.220000000000006), (71.46, -78.82000000000001), (27.859999999999992, -76.02000000000001), (23.859999999999992, -79.22), (-22.140000000000008, -81.22), (-81.74000000000001, -79.22), (-121.74000000000001, -70.02000000000001)]
 
@@ -274,7 +273,7 @@ horse_shape = [[(-8.278688524590162, 33.01639344262295),
   (-8.223214285714285, 24.32142857142857),
   (-8.723214285714285, 26.32142857142857)]]
 
-# I learnt how to use dictionaries using google. I made a list with dictionaries of each part. (Not using AI)
+# I made dictionaries to sort all of the horse parts.
 # Each  dictionary includes: 
 # name     - the object name.
 # array    - the shape list.
@@ -318,7 +317,7 @@ def racerupd(): # This function is called whenever the amount of racers is chang
         if colours.index(wageredon) > racernum: 
             wageredon = None
     
-    if racernum != len(racers): # I learnt '!='
+    if racernum != len(racers):
         # Changing the amount of racers, jockeys, and coloured buttons
         for jockey in jockeys:
             for part in jockey:
@@ -432,13 +431,13 @@ def drawline(colour, thickness, startpos, endpos, turt):
 
 def jockey_move(horse, jock):
   # Moves all jockey parts 1 step.
-  # Is quite precise with the positions, the horse animation causes the horse's to move backwards,
+  # Is quite precise with the positions, the horse animation causes the horse's saddle to move backwards and forwards,
   # so it adapts with the ' - ([0, 5, 8, 6][frame % 4] * jockeysize))'
   for i, par in enumerate(jock):
     par.goto((horse.xcor() + horseposx + shapes[i]["position"][0] * jockeysize - ([0, 5, 8, 6][frame % 4] * jockeysize)), horse.ycor() + horseposy + shapes[i]["position"][1] * jockeysize)
 
 def drawrails():
-    # Just to draw rails. Only used once so could just write the code without a function
+    # Just to draw rails.
     drawline("white", 7, (-590, -320), (590, -320), lines)
     lines.goto(-590, -300)
     raillines = 16
@@ -533,7 +532,7 @@ def start(): # The horse race
         if racernum == finished:
                 break
         for i in range(racernum):
-            # Rigged Win ( ONLY for Red or Hassan!!!!):
+            # Rigged Win:
             # if wageredon == None:
             #     spd[i] = choice([2, 2, 2, 2, 3, 3, 4]) * size * 1.4
             # else:
@@ -542,7 +541,7 @@ def start(): # The horse race
             #     else:
             #         spd[i] = choice([2, 2, 2, 2, 3, 3, 4]) * size * 1.4
             
-            # Non-Rigged Win ( For everyone else!!! ):
+            # Non-Rigged:
             spd[i] = choice([2, 2, 2, 2, 3, 3, 4]) * (size / 2 + 1) * 1.4
     
     if not(wageredon == None):
@@ -733,4 +732,5 @@ scr.onkeypress(bye, "Escape")
 
 update()
 racerupd()
+
 scr.mainloop()
